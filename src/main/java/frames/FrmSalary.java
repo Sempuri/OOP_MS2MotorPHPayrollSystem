@@ -4,11 +4,15 @@
  */
 package frames;
 
+import classes.Employee;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Raya
  */
 public class FrmSalary extends javax.swing.JFrame {
+private Employee[] employee1;
 
     /**
      * Creates new form FrmSalary
@@ -16,6 +20,16 @@ public class FrmSalary extends javax.swing.JFrame {
     public FrmSalary() {
         initComponents();
         setResizable(false);
+        employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
+    }
+
+    //getter
+    public JLabel getLblSalEid() {
+        return lblSalEid;
+    }
+
+    public JLabel getLblSalFName() {
+        return lblSalFName;
     }
 
     /**
@@ -34,7 +48,8 @@ public class FrmSalary extends javax.swing.JFrame {
         logOut_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblSalFName = new javax.swing.JLabel();
+        lblSalEid = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblSalaryInfo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -53,9 +68,9 @@ public class FrmSalary extends javax.swing.JFrame {
         lblEmployeeID = new javax.swing.JLabel();
         txtEmployeeID = new javax.swing.JTextField();
         lblPeriodStartDate = new javax.swing.JLabel();
-        txtPeriodStartDate = new javax.swing.JTextField();
         lblPeriodEndDate = new javax.swing.JLabel();
-        txtPeriodEndDate = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         lblSSSdeductions = new javax.swing.JLabel();
         txtSSSdeductions = new javax.swing.JTextField();
@@ -82,9 +97,7 @@ public class FrmSalary extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(218, 226, 227));
-        setMaximumSize(new java.awt.Dimension(32767, 32767));
         setMinimumSize(new java.awt.Dimension(1020, 680));
-        setPreferredSize(new java.awt.Dimension(1080, 680));
 
         jPanel1.setBackground(new java.awt.Color(218, 226, 227));
 
@@ -115,7 +128,11 @@ public class FrmSalary extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(210, 214, 214));
         jLabel3.setText("|");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\icons\\Untitled design (2).png")); // NOI18N
+        lblSalFName.setForeground(new java.awt.Color(255, 255, 255));
+        lblSalFName.setText("firstname");
+
+        lblSalEid.setForeground(new java.awt.Color(255, 255, 255));
+        lblSalEid.setText("EmployeeID");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,10 +143,12 @@ public class FrmSalary extends javax.swing.JFrame {
                 .addComponent(lblLogoMotorPH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblWelcomeMsg)
-                .addGap(263, 263, 263)
+                .addGap(75, 75, 75)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSalFName)
+                    .addComponent(lblSalEid))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -140,19 +159,23 @@ public class FrmSalary extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(logOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblSalFName)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblSalEid))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(logOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblWelcomeMsg))
-                            .addComponent(lblLogoMotorPH))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblLogoMotorPH)
+                                    .addComponent(lblWelcomeMsg))
+                                .addGap(1, 1, 1)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(108, 133, 136));
@@ -166,7 +189,7 @@ public class FrmSalary extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addComponent(lblSalaryInfo)
                 .addGap(72, 72, 72))
         );
@@ -263,20 +286,15 @@ public class FrmSalary extends javax.swing.JFrame {
 
         lblPeriodStartDate.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblPeriodStartDate.setForeground(new java.awt.Color(255, 255, 255));
-        lblPeriodStartDate.setText("Period Start Date:");
-
-        txtPeriodStartDate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtPeriodStartDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPeriodStartDateActionPerformed(evt);
-            }
-        });
+        lblPeriodStartDate.setText("Month:");
 
         lblPeriodEndDate.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblPeriodEndDate.setForeground(new java.awt.Color(255, 255, 255));
-        lblPeriodEndDate.setText("Period End Date:");
+        lblPeriodEndDate.setText("Year");
 
-        txtPeriodEndDate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -293,15 +311,7 @@ public class FrmSalary extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(lblPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addComponent(txtPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(txtPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(lblNetSalary)
                                 .addComponent(lblGrossSalary)
                                 .addComponent(lblMonthlyRate)
@@ -309,7 +319,15 @@ public class FrmSalary extends javax.swing.JFrame {
                                 .addComponent(txtHourlyRate, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                                 .addComponent(txtMonthlyRate)
                                 .addComponent(txtGrossSalary)
-                                .addComponent(txtNetSalary)))))
+                                .addComponent(txtNetSalary))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -323,11 +341,11 @@ public class FrmSalary extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPeriodStartDate)
                     .addComponent(lblPeriodEndDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(lblHourlyRate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -576,7 +594,7 @@ public class FrmSalary extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,7 +644,10 @@ public class FrmSalary extends javax.swing.JFrame {
     private void request_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_request_buttonActionPerformed
         // TODO add your handling code here:
         FrmRequest request = new FrmRequest();
-            request.show();
+        FrmEmployee_Information _profile = new FrmEmployee_Information();
+        request.getLblReqEid().setText(lblSalEid.getText());
+        request.getLblReqFName().setText(lblSalFName.getText());    
+        request.show();
             
             dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
@@ -655,22 +676,52 @@ public class FrmSalary extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmployeeIDActionPerformed
 
-    private void txtPeriodStartDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPeriodStartDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPeriodStartDateActionPerformed
-
     private void profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profile_buttonActionPerformed
         // TODO add your handling code here:
-        FrmEmployee_Information empInfo = new FrmEmployee_Information();
-        empInfo.show();
-
-        dispose();
+         FrmEmployee_Information _profile = new FrmEmployee_Information();
+        _profile.setVisible(true);
+          
+            
+            for (Employee infoemp: employee1){
+                if (infoemp.GetEmployeeID() == Integer.parseInt(lblSalEid.getText())) {
+                    _profile.setVisible(true);
+                    _profile.getLblEmpStatus().setText(infoemp.GetStatus());
+                    _profile.getTxtEmployeeID().setText(String.valueOf(infoemp.GetEmployeeID()));
+                    _profile.getTxtFirstName().setText(infoemp.GetFirstName());
+                    _profile.getTxtLastName().setText(infoemp.GetLastName());
+                    _profile.getTxtRole().setText(infoemp.GetRole());
+                    _profile.getTxtDepartment().setText(infoemp.GetDepartment());
+                    _profile.getTxtSupervisor().setText(infoemp.GetSupervisor());
+                    _profile.getTxtSSS_number().setText(infoemp.GetSSSNumber());
+                    _profile.getTxtPagibig_number().setText(infoemp.GetPagibigNumber());
+                    _profile.getTxtPhilhealth_number().setText(infoemp.GetPhilhealthNumber());
+                    _profile.getTxtTin_number().setText(infoemp.GetTinNumber());
+                    _profile.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                    _profile.getLblFName().setText(infoemp.GetFirstName());
+                            
+                    System.out.println("sss" + infoemp.GetSSSNumber()+ infoemp.GetBirthday() + infoemp.GetDepartment() + infoemp.GetFirstName() +infoemp.GetLastName() +infoemp.GetPhilhealthNumber() +
+                    infoemp.GetRole() + infoemp.GetStatus() +infoemp.GetSupervisor() + infoemp.GetTinNumber());
+                    
+                    
+                    
+                    
+                    break;
+                }
+                else{
+                    
+                }
+            }
+            
+            dispose();
     }//GEN-LAST:event_profile_buttonActionPerformed
 
     private void attendance_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendance_buttonActionPerformed
         // TODO add your handling code here:
         FrmAttendance attendance = new FrmAttendance();
-        attendance.show();
+        FrmEmployee_Information _profile = new FrmEmployee_Information();
+        attendance.getLblAttEid().setText(lblSalEid.getText());
+        attendance.getLblAttFName().setText(lblSalFName.getText());
+            attendance.show();
 
         dispose();
     }//GEN-LAST:event_attendance_buttonActionPerformed
@@ -712,8 +763,9 @@ public class FrmSalary extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton attendance_button;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -739,6 +791,8 @@ public class FrmSalary extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhoneAllowance;
     private javax.swing.JLabel lblRiceSubsidy;
     private javax.swing.JLabel lblSSSdeductions;
+    private javax.swing.JLabel lblSalEid;
+    private javax.swing.JLabel lblSalFName;
     private javax.swing.JLabel lblSalaryInfo;
     private javax.swing.JLabel lblTotalAllowance;
     private javax.swing.JLabel lblTotalDeductions;
@@ -754,8 +808,6 @@ public class FrmSalary extends javax.swing.JFrame {
     private javax.swing.JTextField txtMonthlyRate;
     private javax.swing.JTextField txtNetSalary;
     private javax.swing.JTextField txtPagibigDeductions;
-    private javax.swing.JTextField txtPeriodEndDate;
-    private javax.swing.JTextField txtPeriodStartDate;
     private javax.swing.JTextField txtPhilhealthDeductions;
     private javax.swing.JTextField txtPhoneAllowance;
     private javax.swing.JTextField txtRiceSubsidy;

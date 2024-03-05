@@ -247,7 +247,9 @@ public class FrmLogin extends javax.swing.JFrame {
                     _profile.getTxtPagibig_number().setText(infoemp.GetPagibigNumber());
                     _profile.getTxtPhilhealth_number().setText(infoemp.GetPhilhealthNumber());
                     _profile.getTxtTin_number().setText(infoemp.GetTinNumber());
-                            
+                    _profile.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                    _profile.getLblFName().setText(infoemp.GetFirstName());
+                    
                     System.out.println("sss" + infoemp.GetSSSNumber()+ infoemp.GetBirthday() + infoemp.GetDepartment() + infoemp.GetFirstName() +infoemp.GetLastName() +infoemp.GetPhilhealthNumber() +
                     infoemp.GetRole() + infoemp.GetStatus() +infoemp.GetSupervisor() + infoemp.GetTinNumber());
                     
