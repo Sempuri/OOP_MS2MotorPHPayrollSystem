@@ -21,6 +21,7 @@ public class FrmLogin extends javax.swing.JFrame {
     public FrmLogin() {
         initComponents();
         setResizable(false);
+        setLocationRelativeTo(null); // Center the frame
         employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
     }
 
@@ -38,7 +39,6 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblPayrollSystem = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        lblForgotPassword = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
@@ -52,9 +52,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(218, 226, 227));
-        setMaximumSize(new java.awt.Dimension(1080, 632));
         setMinimumSize(new java.awt.Dimension(1080, 632));
-        setPreferredSize(new java.awt.Dimension(1080, 632));
         getContentPane().setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(218, 226, 227));
@@ -88,10 +86,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(140, 172, 177));
         jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-
-        lblForgotPassword.setFont(new java.awt.Font("Verdana", 0, 8)); // NOI18N
-        lblForgotPassword.setForeground(new java.awt.Color(255, 255, 255));
-        lblForgotPassword.setText("Forgot password?");
 
         lblUsername.setFont(new java.awt.Font("Verdana", 1, 16)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,9 +131,7 @@ public class FrmLogin extends javax.swing.JFrame {
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -156,9 +148,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblForgotPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(92, 92, 92)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,6 +226,7 @@ public class FrmLogin extends javax.swing.JFrame {
             for (Employee infoemp: employee1){
                 if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
                     _profile.setVisible(true);
+                    _profile.setLocationRelativeTo(null); // Center the frame
                     _profile.getLblEmpStatus().setText(infoemp.GetStatus());
                     _profile.getTxtEmployeeID().setText(String.valueOf(infoemp.GetEmployeeID()));
                     _profile.getTxtFirstName().setText(infoemp.GetFirstName());
@@ -324,7 +315,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lblForgotPassword;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPayrollSystem;
     private javax.swing.JLabel lblSubtitle;

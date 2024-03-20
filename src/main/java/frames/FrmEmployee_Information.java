@@ -3,6 +3,7 @@ package frames;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import frames.FrmSalary;
+import frames.FrmRequest;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -94,6 +95,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblFName = new javax.swing.JLabel();
         lblEid = new javax.swing.JLabel();
+        lblIDniEmployee = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         profilePicture_panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -143,7 +145,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
 
         lblWelcomeMsg.setFont(new java.awt.Font("Verdana", 0, 25)); // NOI18N
         lblWelcomeMsg.setForeground(new java.awt.Color(208, 228, 230));
-        lblWelcomeMsg.setText("Welcome!");
+        lblWelcomeMsg.setText("Welcome,");
 
         logOut_button.setBackground(new java.awt.Color(53, 66, 68));
         logOut_button.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
@@ -167,11 +169,17 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         lblLogoMotorPH.setForeground(new java.awt.Color(208, 228, 230));
         lblLogoMotorPH.setText("MotorPH");
 
+        lblFName.setFont(new java.awt.Font("Verdana", 1, 25)); // NOI18N
         lblFName.setForeground(new java.awt.Color(255, 255, 255));
         lblFName.setText("firstname");
 
+        lblEid.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lblEid.setForeground(new java.awt.Color(255, 255, 255));
-        lblEid.setText("EmployeeID");
+        lblEid.setText("###");
+
+        lblIDniEmployee.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        lblIDniEmployee.setForeground(new java.awt.Color(255, 255, 255));
+        lblIDniEmployee.setText("Employee ID:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,13 +188,15 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(lblLogoMotorPH, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 448, Short.MAX_VALUE)
+                .addGap(113, 113, 113)
                 .addComponent(lblWelcomeMsg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addComponent(lblIDniEmployee)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFName)
-                    .addComponent(lblEid))
-                .addGap(29, 29, 29)
+                .addComponent(lblEid)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
@@ -199,21 +209,17 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logOut_button, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblWelcomeMsg)
+                        .addComponent(lblLogoMotorPH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblFName)
-                        .addGap(4, 4, 4)
                         .addComponent(lblEid)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(logOut_button, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblWelcomeMsg)
-                                .addComponent(lblLogoMotorPH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(13, 13, 13))))
+                        .addComponent(lblIDniEmployee)))
+                .addGap(13, 13, 13))
         );
 
         jPanel3.setBackground(new java.awt.Color(173, 202, 206));
@@ -374,51 +380,61 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         lblTin_number.setForeground(new java.awt.Color(255, 255, 255));
         lblTin_number.setText("TIN Number:");
 
+        txtTin_number.setEditable(false);
         txtTin_number.setBackground(new java.awt.Color(140, 172, 177));
         txtTin_number.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtTin_number.setForeground(new java.awt.Color(255, 255, 255));
         txtTin_number.setBorder(null);
 
+        txtPhilhealth_number.setEditable(false);
         txtPhilhealth_number.setBackground(new java.awt.Color(140, 172, 177));
         txtPhilhealth_number.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtPhilhealth_number.setForeground(new java.awt.Color(255, 255, 255));
         txtPhilhealth_number.setBorder(null);
 
+        txtPagibig_number.setEditable(false);
         txtPagibig_number.setBackground(new java.awt.Color(140, 172, 177));
         txtPagibig_number.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtPagibig_number.setForeground(new java.awt.Color(255, 255, 255));
         txtPagibig_number.setBorder(null);
 
+        txtSSS_number.setEditable(false);
         txtSSS_number.setBackground(new java.awt.Color(140, 172, 177));
         txtSSS_number.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtSSS_number.setForeground(new java.awt.Color(255, 255, 255));
         txtSSS_number.setBorder(null);
 
+        txtSupervisor.setEditable(false);
         txtSupervisor.setBackground(new java.awt.Color(140, 172, 177));
         txtSupervisor.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtSupervisor.setForeground(new java.awt.Color(255, 255, 255));
         txtSupervisor.setBorder(null);
 
+        txtDepartment.setEditable(false);
         txtDepartment.setBackground(new java.awt.Color(140, 172, 177));
         txtDepartment.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtDepartment.setForeground(new java.awt.Color(255, 255, 255));
         txtDepartment.setBorder(null);
 
+        txtRole.setEditable(false);
         txtRole.setBackground(new java.awt.Color(140, 172, 177));
         txtRole.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtRole.setForeground(new java.awt.Color(255, 255, 255));
         txtRole.setBorder(null);
 
+        txtLastName.setEditable(false);
         txtLastName.setBackground(new java.awt.Color(140, 172, 177));
         txtLastName.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtLastName.setForeground(new java.awt.Color(255, 255, 255));
         txtLastName.setBorder(null);
 
+        txtFirstName.setEditable(false);
         txtFirstName.setBackground(new java.awt.Color(140, 172, 177));
         txtFirstName.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtFirstName.setForeground(new java.awt.Color(255, 255, 255));
         txtFirstName.setBorder(null);
 
+        txtEmployeeID.setEditable(false);
         txtEmployeeID.setBackground(new java.awt.Color(140, 172, 177));
         txtEmployeeID.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtEmployeeID.setForeground(new java.awt.Color(255, 255, 255));
@@ -524,7 +540,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,7 +564,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(-20, 0, 1120, 650);
+        jPanel2.setBounds(-20, 0, 1070, 650);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -558,20 +574,33 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         FrmRequest request = new FrmRequest();
         FrmEmployee_Information _profile = new FrmEmployee_Information();
         request.getLblReqEid().setText(lblEid.getText());
-        request.getLblReqFName().setText(lblFName.getText());    
+        request.getLblReqFName().setText(lblFName.getText());  
         request.show();
+        request.setLocationRelativeTo(null); // Center the frame
+        
+        String employeeId = lblEid.getText();
+        request.displayDataForEmployee(employeeId); // Pass the employee ID
             
             dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
 
     private void attendance_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendance_buttonActionPerformed
         // TODO add your handling code here:
-        FrmAttendance attendance = new FrmAttendance();         
-        FrmEmployee_Information _profile = new FrmEmployee_Information();
-        attendance.getLblAttEid().setText(lblEid.getText());
-        attendance.getLblAttFName().setText(lblFName.getText());
-            attendance.show();
-            
+        // Get the logged-in employee's ID and name
+            String employeeId = lblEid.getText();
+            String employeeName = lblFName.getText();
+
+            // Open the attendance frame
+            FrmAttendance attendance = new FrmAttendance();
+            attendance.getLblAttEid().setText(employeeId);
+            attendance.getLblAttFName().setText(employeeName);
+            attendance.setVisible(true);
+            attendance.setLocationRelativeTo(null); // Center the frame
+
+            // Display attendance data for the logged-in employee
+            attendance.displayTimeTrackerFromCSV(employeeId);
+
+            // Close the current frame
             dispose();
     }//GEN-LAST:event_attendance_buttonActionPerformed
 
@@ -579,6 +608,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmLogin logOut = new FrmLogin();
             logOut.show();
+            logOut.setLocationRelativeTo(null); // Center the frame
             
             dispose();
     }//GEN-LAST:event_logOut_buttonActionPerformed
@@ -590,6 +620,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         salary.getLblSalEid().setText(lblEid.getText());
         salary.getLblSalFName().setText(lblFName.getText());
         salary.show();
+        salary.setLocationRelativeTo(null); // Center the frame
 
         dispose();
     }//GEN-LAST:event_salary_buttonActionPerformed
@@ -655,6 +686,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmployeeID;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblIDniEmployee;
     private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblLogoMotorPH;
     private javax.swing.JLabel lblPagibig_number;

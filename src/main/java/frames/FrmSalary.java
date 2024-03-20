@@ -5,7 +5,15 @@
 package frames;
 
 import classes.Employee;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,12 +52,13 @@ private Employee[] employee1;
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblLogoMotorPH = new javax.swing.JLabel();
-        lblWelcomeMsg = new javax.swing.JLabel();
         logOut_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblSalFName = new javax.swing.JLabel();
         lblSalEid = new javax.swing.JLabel();
+        lblWelcomeMsg = new javax.swing.JLabel();
+        lblIDniEmployee = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblSalaryInfo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -65,12 +74,11 @@ private Employee[] employee1;
         txtGrossSalary = new javax.swing.JTextField();
         lblNetSalary = new javax.swing.JLabel();
         txtNetSalary = new javax.swing.JTextField();
-        lblEmployeeID = new javax.swing.JLabel();
-        txtEmployeeID = new javax.swing.JTextField();
         lblPeriodStartDate = new javax.swing.JLabel();
         lblPeriodEndDate = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        btnViewSalary = new javax.swing.JButton();
+        jMCMonth = new com.toedter.calendar.JMonthChooser();
+        jYCYear = new com.toedter.calendar.JYearChooser();
         jPanel7 = new javax.swing.JPanel();
         lblSSSdeductions = new javax.swing.JLabel();
         txtSSSdeductions = new javax.swing.JTextField();
@@ -78,10 +86,10 @@ private Employee[] employee1;
         txtPagibigDeductions = new javax.swing.JTextField();
         lblPhilhealthDeductions = new javax.swing.JLabel();
         txtPhilhealthDeductions = new javax.swing.JTextField();
-        lblWithholdingTax = new javax.swing.JLabel();
-        txtWithholdingTax = new javax.swing.JTextField();
         lblTotalDeductions = new javax.swing.JLabel();
         txtTotalDeductions = new javax.swing.JTextField();
+        lblWithholdingTax = new javax.swing.JLabel();
+        txtWithholdingTax = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         lblRiceSubsidy = new javax.swing.JLabel();
         txtRiceSubsidy = new javax.swing.JTextField();
@@ -107,10 +115,6 @@ private Employee[] employee1;
         lblLogoMotorPH.setForeground(new java.awt.Color(208, 228, 230));
         lblLogoMotorPH.setText("MotorPH");
 
-        lblWelcomeMsg.setFont(new java.awt.Font("Verdana", 0, 25)); // NOI18N
-        lblWelcomeMsg.setForeground(new java.awt.Color(208, 228, 230));
-        lblWelcomeMsg.setText("Welcome!");
-
         logOut_button.setBackground(new java.awt.Color(53, 66, 68));
         logOut_button.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         logOut_button.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,11 +132,21 @@ private Employee[] employee1;
         jLabel3.setForeground(new java.awt.Color(210, 214, 214));
         jLabel3.setText("|");
 
+        lblSalFName.setFont(new java.awt.Font("Verdana", 1, 25)); // NOI18N
         lblSalFName.setForeground(new java.awt.Color(255, 255, 255));
         lblSalFName.setText("firstname");
 
+        lblSalEid.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lblSalEid.setForeground(new java.awt.Color(255, 255, 255));
-        lblSalEid.setText("EmployeeID");
+        lblSalEid.setText("###");
+
+        lblWelcomeMsg.setFont(new java.awt.Font("Verdana", 0, 25)); // NOI18N
+        lblWelcomeMsg.setForeground(new java.awt.Color(208, 228, 230));
+        lblWelcomeMsg.setText("Welcome,");
+
+        lblIDniEmployee.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        lblIDniEmployee.setForeground(new java.awt.Color(255, 255, 255));
+        lblIDniEmployee.setText("Employee ID:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,15 +155,17 @@ private Employee[] employee1;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(lblLogoMotorPH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(178, 178, 178)
                 .addComponent(lblWelcomeMsg)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSalFName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSalFName)
-                    .addComponent(lblSalEid))
+                .addComponent(lblIDniEmployee)
                 .addGap(18, 18, 18)
+                .addComponent(lblSalEid)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(logOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,23 +175,21 @@ private Employee[] employee1;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblSalFName)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSalEid))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(logOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSalEid)
+                            .addComponent(lblIDniEmployee))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(logOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblLogoMotorPH)
-                                    .addComponent(lblWelcomeMsg))
-                                .addGap(1, 1, 1)))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                                .addComponent(lblLogoMotorPH)
+                                .addComponent(lblWelcomeMsg)
+                                .addComponent(lblSalFName))
+                            .addGap(1, 1, 1))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(108, 133, 136));
@@ -189,7 +203,7 @@ private Employee[] employee1;
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSalaryInfo)
                 .addGap(72, 72, 72))
         );
@@ -253,36 +267,29 @@ private Employee[] employee1;
         lblHourlyRate.setForeground(new java.awt.Color(255, 255, 255));
         lblHourlyRate.setText("Hourly Rate:");
 
+        txtHourlyRate.setEditable(false);
         txtHourlyRate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblMonthlyRate.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblMonthlyRate.setForeground(new java.awt.Color(255, 255, 255));
         lblMonthlyRate.setText("Monthly Rate:");
 
+        txtMonthlyRate.setEditable(false);
         txtMonthlyRate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblGrossSalary.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblGrossSalary.setForeground(new java.awt.Color(255, 255, 255));
         lblGrossSalary.setText("Gross Salary:");
 
+        txtGrossSalary.setEditable(false);
         txtGrossSalary.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblNetSalary.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         lblNetSalary.setForeground(new java.awt.Color(255, 255, 255));
         lblNetSalary.setText("Net Salary:");
 
+        txtNetSalary.setEditable(false);
         txtNetSalary.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
-        lblEmployeeID.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblEmployeeID.setForeground(new java.awt.Color(255, 255, 255));
-        lblEmployeeID.setText("Employee ID:");
-
-        txtEmployeeID.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtEmployeeID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmployeeIDActionPerformed(evt);
-            }
-        });
 
         lblPeriodStartDate.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblPeriodStartDate.setForeground(new java.awt.Color(255, 255, 255));
@@ -290,11 +297,21 @@ private Employee[] employee1;
 
         lblPeriodEndDate.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblPeriodEndDate.setForeground(new java.awt.Color(255, 255, 255));
-        lblPeriodEndDate.setText("Year");
+        lblPeriodEndDate.setText("Year:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnViewSalary.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnViewSalary.setText("View Salary");
+        btnViewSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewSalaryActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jMCMonth.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+
+        jYCYear.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jYCYear.setStartYear(2022);
+        jYCYear.setValue(2022);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -304,48 +321,47 @@ private Employee[] employee1;
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
-                        .addComponent(txtEmployeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(lblEmployeeID))
+                        .addComponent(btnViewSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                        .addComponent(lblPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jMCMonth, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jYCYear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblNetSalary)
                                 .addComponent(lblGrossSalary)
                                 .addComponent(lblMonthlyRate)
                                 .addComponent(lblHourlyRate)
                                 .addComponent(txtHourlyRate, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                                 .addComponent(txtMonthlyRate)
                                 .addComponent(txtGrossSalary)
-                                .addComponent(txtNetSalary))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPeriodStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPeriodEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                                .addComponent(txtNetSalary)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(74, 74, 74)
+                                    .addComponent(lblNetSalary))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblEmployeeID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmployeeID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPeriodStartDate)
                     .addComponent(lblPeriodEndDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jMCMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jYCYear, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(btnViewSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblHourlyRate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,6 +386,7 @@ private Employee[] employee1;
         lblSSSdeductions.setForeground(new java.awt.Color(255, 255, 255));
         lblSSSdeductions.setText("SSS Deductions:");
 
+        txtSSSdeductions.setEditable(false);
         txtSSSdeductions.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtSSSdeductions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,43 +398,54 @@ private Employee[] employee1;
         lblPagibigDeductions.setForeground(new java.awt.Color(255, 255, 255));
         lblPagibigDeductions.setText("Pag-IBIG Deductions:");
 
+        txtPagibigDeductions.setEditable(false);
         txtPagibigDeductions.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblPhilhealthDeductions.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblPhilhealthDeductions.setForeground(new java.awt.Color(255, 255, 255));
         lblPhilhealthDeductions.setText("PhilHealth Deductions:");
 
+        txtPhilhealthDeductions.setEditable(false);
         txtPhilhealthDeductions.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        lblTotalDeductions.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lblTotalDeductions.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalDeductions.setText("Total Deductions:");
+
+        txtTotalDeductions.setEditable(false);
+        txtTotalDeductions.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         lblWithholdingTax.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lblWithholdingTax.setForeground(new java.awt.Color(255, 255, 255));
         lblWithholdingTax.setText("Withholding Tax:");
 
+        txtWithholdingTax.setEditable(false);
         txtWithholdingTax.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
-        lblTotalDeductions.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lblTotalDeductions.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotalDeductions.setText("Total Deductions:");
-
-        txtTotalDeductions.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTotalDeductions)
-                    .addComponent(lblWithholdingTax)
-                    .addComponent(lblPhilhealthDeductions)
-                    .addComponent(lblPagibigDeductions)
-                    .addComponent(lblSSSdeductions)
-                    .addComponent(txtSSSdeductions)
-                    .addComponent(txtPagibigDeductions)
-                    .addComponent(txtPhilhealthDeductions)
-                    .addComponent(txtWithholdingTax)
-                    .addComponent(txtTotalDeductions, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPhilhealthDeductions)
+                            .addComponent(lblPagibigDeductions)
+                            .addComponent(lblSSSdeductions)
+                            .addComponent(txtSSSdeductions)
+                            .addComponent(txtPagibigDeductions)
+                            .addComponent(txtPhilhealthDeductions)
+                            .addComponent(txtTotalDeductions, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(lblTotalDeductions))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblWithholdingTax)
+                            .addComponent(txtWithholdingTax, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -435,14 +463,14 @@ private Employee[] employee1;
                 .addComponent(lblPhilhealthDeductions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPhilhealthDeductions, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTotalDeductions)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTotalDeductions, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblWithholdingTax)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtWithholdingTax, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotalDeductions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTotalDeductions, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -452,6 +480,7 @@ private Employee[] employee1;
         lblRiceSubsidy.setForeground(new java.awt.Color(255, 255, 255));
         lblRiceSubsidy.setText("Rice Subsidy:");
 
+        txtRiceSubsidy.setEditable(false);
         txtRiceSubsidy.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtRiceSubsidy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,6 +492,7 @@ private Employee[] employee1;
         lblPhoneAllowance.setForeground(new java.awt.Color(255, 255, 255));
         lblPhoneAllowance.setText("Phone Allowance:");
 
+        txtPhoneAllowance.setEditable(false);
         txtPhoneAllowance.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtPhoneAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -474,6 +504,7 @@ private Employee[] employee1;
         lblClothingAllowance.setForeground(new java.awt.Color(255, 255, 255));
         lblClothingAllowance.setText("Clothing Allowance:");
 
+        txtClothingAllowance.setEditable(false);
         txtClothingAllowance.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtClothingAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,6 +516,7 @@ private Employee[] employee1;
         lblTotalAllowance.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalAllowance.setText("Total Allowance:");
 
+        txtTotalAllowance.setEditable(false);
         txtTotalAllowance.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtTotalAllowance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -594,7 +626,7 @@ private Employee[] employee1;
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,14 +648,14 @@ private Employee[] employee1;
                     .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(attendance_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(request_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,6 +669,7 @@ private Employee[] employee1;
         // TODO add your handling code here:
         FrmLogin logOut = new FrmLogin();
             logOut.show();
+            logOut.setLocationRelativeTo(null); // Center the frame
             
             dispose();
     }//GEN-LAST:event_logOut_buttonActionPerformed
@@ -648,7 +681,11 @@ private Employee[] employee1;
         request.getLblReqEid().setText(lblSalEid.getText());
         request.getLblReqFName().setText(lblSalFName.getText());    
         request.show();
-            
+        request.setLocationRelativeTo(null); // Center the frame
+        
+        String employeeId = lblSalEid.getText();
+        request.displayDataForEmployee(employeeId); // Pass the employee ID
+        
             dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
 
@@ -672,15 +709,11 @@ private Employee[] employee1;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalAllowanceActionPerformed
 
-    private void txtEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmployeeIDActionPerformed
-
     private void profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profile_buttonActionPerformed
         // TODO add your handling code here:
          FrmEmployee_Information _profile = new FrmEmployee_Information();
         _profile.setVisible(true);
-          
+        _profile.setLocationRelativeTo(null); // Center the frame  
             
             for (Employee infoemp: employee1){
                 if (infoemp.GetEmployeeID() == Integer.parseInt(lblSalEid.getText())) {
@@ -717,14 +750,194 @@ private Employee[] employee1;
 
     private void attendance_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendance_buttonActionPerformed
         // TODO add your handling code here:
-        FrmAttendance attendance = new FrmAttendance();
-        FrmEmployee_Information _profile = new FrmEmployee_Information();
-        attendance.getLblAttEid().setText(lblSalEid.getText());
-        attendance.getLblAttFName().setText(lblSalFName.getText());
-            attendance.show();
+        // Get the logged-in employee's ID and name
+            String employeeId = lblSalEid.getText();
+            String employeeName = lblSalFName.getText();
 
-        dispose();
+            // Open the attendance frame
+            FrmAttendance attendance = new FrmAttendance();
+            attendance.getLblAttEid().setText(employeeId);
+            attendance.getLblAttFName().setText(employeeName);
+            attendance.setVisible(true);
+            attendance.setLocationRelativeTo(null); // Center the frame
+
+            // Display attendance data for the logged-in employee
+            attendance.displayTimeTrackerFromCSV(employeeId);
+
+            // Close the current frame
+            dispose();
     }//GEN-LAST:event_attendance_buttonActionPerformed
+
+    private void btnViewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSalaryActionPerformed
+        // TODO add your handling code here:
+        // Read the "Employee.csv" file to get hourly rate and monthly rate
+        String employeeFilePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv";
+        String attendanceFilePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\OldAttendance.csv";
+
+        // Get the selected month and year
+        int selectedMonth = jMCMonth.getMonth() + 1; // Month is zero-based, so add 1
+        int selectedYear = jYCYear.getYear();
+
+        // Initialize gross salary
+        double grossSalary = 0.0;
+
+        // Initialize hourly rate and monthly rate
+        double hourlyRate = 0.0;
+        double monthlyRate = 0.0;
+        
+        // Initialize rice subsidy, phone allowance, and clothing allowance
+        double riceSubsidy = 0.0;
+        double phoneAllowance = 0.0;
+        double clothingAllowance = 0.0;
+        
+        // Initialize SSS, Pagibig, Philhealth, and Withholding Tax deductions
+        double sssDeduction = 0.0;
+        double phealth = 0.0;
+        double pagibig = 0.0;
+        double withTax = 0.0;
+        
+        
+        boolean dataFound = false; // Flag to check if data is found for the selected month and year
+
+        try (BufferedReader employeeReader = new BufferedReader(new FileReader(employeeFilePath));
+             BufferedReader attendanceReader = new BufferedReader(new FileReader(attendanceFilePath))) {
+
+            // Read and discard the header row of both files
+            String employeeHeader = employeeReader.readLine();
+            String attendanceHeader = attendanceReader.readLine();
+
+            // Search for the employee row that matches the employee number
+            String employeeLine;
+            while ((employeeLine = employeeReader.readLine()) != null) {
+                String[] employeeParts = employeeLine.split(",");
+                if (employeeParts.length > 0 && employeeParts[0].equals(lblSalEid.getText())) {
+                    // Retrieve the hourly rate value from column index 19
+                    hourlyRate = Double.parseDouble(employeeParts[19]);
+                    // Retrieve the monthly rate value from column index 14
+                    monthlyRate = Double.parseDouble(employeeParts[14]);
+                     // Retrieve the rice subsidy value from column index 15
+                    riceSubsidy = Double.parseDouble(employeeParts[15]);
+                    // Retrieve the phone allowance value from column index 16
+                    phoneAllowance = Double.parseDouble(employeeParts[16]);
+                    // Retrieve the clothing allowance value from column index 17
+                    clothingAllowance = Double.parseDouble(employeeParts[17]);
+                    break; // Exit the loop once the employee data is processed
+                }
+            }
+
+            // Search for the attendance records for the selected month and year
+            String attendanceLine;
+            while ((attendanceLine = attendanceReader.readLine()) != null) {
+                String[] attendanceParts = attendanceLine.split(",");
+                if (attendanceParts.length > 0 && attendanceParts[0].equals(lblSalEid.getText())) {
+                    // Parse the date to check if it matches the selected month and year
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    Date date = dateFormat.parse(attendanceParts[3]); // Assuming date is in column index 3
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date);
+                    int recordMonth = calendar.get(Calendar.MONTH) + 1; // Month is zero-based, so add 1
+                    int recordYear = calendar.get(Calendar.YEAR);
+                    if (recordMonth == selectedMonth && recordYear == selectedYear) {
+                        // Accumulate the total worked hours from column index 6
+                        double totalWorkedHours = Double.parseDouble(attendanceParts[6]);
+                        // Calculate the gross salary by multiplying total worked hours with hourly rate
+                        grossSalary += totalWorkedHours * hourlyRate;
+                        dataFound = true; // Set the flag to true if data is found
+                    }
+                }
+            }
+
+            // If no data is found for the selected month and year, display a popup message
+            if (!dataFound) {
+                JOptionPane.showMessageDialog(this, "No data available for the selected month and year. Please pick another month and year.", "Data Not Found", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Clear or disable the text fields related to salary details
+                txtHourlyRate.setText("");
+                txtMonthlyRate.setText("");
+                txtGrossSalary.setText("");
+                
+                // Clear or disable other related text fields
+                txtRiceSubsidy.setText("");
+                txtPhoneAllowance.setText("");
+                txtClothingAllowance.setText("");
+                txtTotalAllowance.setText("");
+                
+                // Clear or disable deductions text fields
+                txtSSSdeductions.setText("");
+                txtPagibigDeductions.setText("");
+                txtPhilhealthDeductions.setText("");
+                txtWithholdingTax.setText("");
+                txtTotalDeductions.setText("");
+                
+                // Clear or disable net salary text field
+                txtNetSalary.setText("");
+
+                // Return from the method as no further processing is required
+                return;
+            }
+            
+            // Compute the total allowance
+            double totalAllowance = riceSubsidy + phoneAllowance + clothingAllowance;
+            
+            // Compute deductions based on gross monthly salary
+            if (grossSalary >= 24750.0) {
+                sssDeduction = 1125;
+                phealth = (grossSalary * 0.03) * 0.5;
+                pagibig = 100;
+            } else if (grossSalary < 24750.0) {
+                sssDeduction = grossSalary / 22.4691;
+                phealth = (grossSalary * 0.03) * 0.5;
+                pagibig = 100;
+            }
+            
+            // Initialize and Compute the Total Deductions of SSS, Philhealth and Pagibig, and the Tax Income
+            double totDeduction = sssDeduction + phealth + pagibig;
+            double taxIncome = grossSalary - totDeduction;
+            
+            //Initialize Net Salary
+            double netSalary = 0.0;
+            
+            // Compute net monthly wage based on tax income
+            if (taxIncome >= 33333.0) {
+                withTax = (taxIncome - 33333.00) * 0.25 + 2500.00;
+                netSalary = (taxIncome - withTax)+ totalAllowance;
+            } else if (taxIncome < 33333) {
+                withTax = (taxIncome - 20833.00) * 0.20;
+                netSalary = (taxIncome - withTax) + totalAllowance;
+            }
+            
+            // Set the hourly rate and monthly rate values into their respective text fields with two decimal places
+            txtHourlyRate.setText(String.format("%.2f", hourlyRate));
+            txtMonthlyRate.setText(String.format("%.2f", monthlyRate));
+
+            // Set the gross salary value into the txtGrossSalary text field with two decimal places
+            txtGrossSalary.setText(String.format("%.2f", grossSalary));
+
+            // Set the rice subsidy, phone allowance, and clothing allowance values into their respective text fields
+            txtRiceSubsidy.setText(String.format("%.2f", riceSubsidy));
+            txtPhoneAllowance.setText(String.format("%.2f", phoneAllowance));
+            txtClothingAllowance.setText(String.format("%.2f", clothingAllowance));
+            
+            // Set the total allowance value into the txtTotalAllowance text field
+            txtTotalAllowance.setText(String.format("%.2f", totalAllowance));
+            
+            // Set the SSS, Pagibig, Philhealth, and Withholding Tax deductions values into their respective text fields
+            txtSSSdeductions.setText(String.format("%.2f", sssDeduction));
+            txtPagibigDeductions.setText(String.format("%.2f", pagibig));
+            txtPhilhealthDeductions.setText(String.format("%.2f", phealth));
+            txtWithholdingTax.setText(String.format("%.2f", withTax));
+            
+            // Set the total deductions value into the txtTotalDeductions text field
+            txtTotalDeductions.setText(String.format("%.2f", totDeduction));
+            
+            // Set the Net Salary value into the txtNetSalary text field
+            txtNetSalary.setText(String.format("%.2f", netSalary));
+            
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            // Handle the exceptions appropriately
+        }
+    }//GEN-LAST:event_btnViewSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -763,10 +976,10 @@ private Employee[] employee1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton attendance_button;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btnViewSalary;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private com.toedter.calendar.JMonthChooser jMCMonth;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -775,12 +988,13 @@ private Employee[] employee1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private com.toedter.calendar.JYearChooser jYCYear;
     private javax.swing.JLabel lblAllowance;
     private javax.swing.JLabel lblClothingAllowance;
     private javax.swing.JLabel lblDeductions;
-    private javax.swing.JLabel lblEmployeeID;
     private javax.swing.JLabel lblGrossSalary;
     private javax.swing.JLabel lblHourlyRate;
+    private javax.swing.JLabel lblIDniEmployee;
     private javax.swing.JLabel lblLogoMotorPH;
     private javax.swing.JLabel lblMonthlyRate;
     private javax.swing.JLabel lblNetSalary;
@@ -802,7 +1016,6 @@ private Employee[] employee1;
     private javax.swing.JButton profile_button;
     private javax.swing.JButton request_button;
     private javax.swing.JTextField txtClothingAllowance;
-    private javax.swing.JTextField txtEmployeeID;
     private javax.swing.JTextField txtGrossSalary;
     private javax.swing.JTextField txtHourlyRate;
     private javax.swing.JTextField txtMonthlyRate;
