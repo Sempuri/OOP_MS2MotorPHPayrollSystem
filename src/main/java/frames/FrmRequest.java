@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,7 +30,7 @@ private Employee[] employee1;
      */
     public FrmRequest() {
         initComponents();
-        employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
+        employee1 = Employee.readEmployee("src\\main\\java\\files\\Employee.csv");
         showDate();
     
     }
@@ -66,30 +67,7 @@ private Employee[] employee1;
     private String formatDate(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         return date != null ? dateFormat.format(date) : "";
-}
-    //for displaying of data for employee
-    public void displayDataForEmployee(String employeeId) {
-    DefaultTableModel model = (DefaultTableModel) requestHistory_table.getModel();
-    model.setRowCount(0); // Clear existing rows
-
-    String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Request.csv";
-
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        // Read the header row
-        String header = reader.readLine();
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
-            if (parts.length >= 6 && parts[0].equals(employeeId)) {
-                model.addRow(parts);
-            }
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Handle the exception appropriately
-    }
-    }
+} 
     
     private void clearInputFields() {
     // Clear input fields
@@ -123,8 +101,6 @@ private Employee[] employee1;
         lblIDniEmployee = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblRequestPortal = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        lblHistory = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         lblFileForRequest = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -139,8 +115,7 @@ private Employee[] employee1;
         lblDateToday = new javax.swing.JLabel();
         jDCStartDate = new com.toedter.calendar.JDateChooser();
         jDCEndDate = new com.toedter.calendar.JDateChooser();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        requestHistory_table = new javax.swing.JTable();
+        btnLeaveLog = new javax.swing.JButton();
         profile_button = new javax.swing.JButton();
         attendance_button = new javax.swing.JButton();
         salary_button = new javax.swing.JButton();
@@ -201,11 +176,11 @@ private Employee[] employee1;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(lblLogoMotorPH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                 .addComponent(lblWelcomeMsg1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblReqFName)
-                .addGap(184, 184, 184)
+                .addGap(128, 128, 128)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblIDniEmployee)
@@ -244,10 +219,10 @@ private Employee[] employee1;
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(421, 421, 421)
                 .addComponent(lblRequestPortal)
-                .addGap(427, 427, 427))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,26 +230,6 @@ private Employee[] employee1;
                 .addContainerGap()
                 .addComponent(lblRequestPortal, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        jPanel4.setBackground(new java.awt.Color(140, 172, 177));
-
-        lblHistory.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        lblHistory.setForeground(new java.awt.Color(255, 255, 255));
-        lblHistory.setText("History");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(267, 267, 267)
-                .addComponent(lblHistory)
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel5.setBackground(new java.awt.Color(140, 172, 177));
@@ -290,7 +245,7 @@ private Employee[] employee1;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblFileForRequest)
-                .addGap(134, 134, 134))
+                .addGap(385, 385, 385))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,85 +307,81 @@ private Employee[] employee1;
         jDCEndDate.setDateFormatString("MM/dd/yyyy");
         jDCEndDate.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
+        btnLeaveLog.setBackground(new java.awt.Color(108, 133, 136));
+        btnLeaveLog.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        btnLeaveLog.setForeground(new java.awt.Color(255, 255, 255));
+        btnLeaveLog.setText("View Leave Request Log");
+        btnLeaveLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaveLogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStartdate)
-                    .addComponent(lblEnddate)
-                    .addComponent(lblTypeOfLeave)
-                    .addComponent(lblReasonOfRequest, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtReasonOfRequest, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLeavetype, 0, 246, Short.MAX_VALUE)
-                    .addComponent(jDCStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDCEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(lblDateToday)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDate))
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLeavetype, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDCStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jDCEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                                        .addComponent(btnLeaveLog, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblTypeOfLeave)
+                            .addComponent(lblStartdate)
+                            .addComponent(lblEnddate)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addComponent(lblReasonOfRequest)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtReasonOfRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                        .addGap(159, 159, 159)
+                        .addComponent(lblDateToday)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblDate)))
+                .addGap(70, 70, 70))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
                     .addComponent(lblDateToday))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTypeOfLeave)
                     .addComponent(txtLeavetype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblStartdate)
-                    .addComponent(jDCStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEnddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDCEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblReasonOfRequest)
-                    .addComponent(txtReasonOfRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStartdate)
+                            .addComponent(jDCStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblEnddate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDCEndDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnLeaveLog, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtReasonOfRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblReasonOfRequest))
+                .addGap(40, 40, 40)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGap(63, 63, 63))
         );
-
-        requestHistory_table.setBackground(new java.awt.Color(108, 133, 136));
-        requestHistory_table.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        requestHistory_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Employee ID #", "Date", "Leave Type", "Start Date", "End Date", "Reason", "Status", "Approver", "Approved Date"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        requestHistory_table.setGridColor(new java.awt.Color(173, 202, 206));
-        requestHistory_table.setShowGrid(true);
-        jScrollPane1.setViewportView(requestHistory_table);
 
         profile_button.setBackground(new java.awt.Color(53, 66, 68));
         profile_button.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
@@ -467,28 +418,22 @@ private Employee[] employee1;
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(attendance_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(36, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(attendance_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,20 +442,16 @@ private Employee[] employee1;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(42, 42, 42)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(attendance_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -518,8 +459,9 @@ private Employee[] employee1;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,53 +484,70 @@ private Employee[] employee1;
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:                                                                          
-    // Get the values from text fields
-    String employeeId = lblReqEid.getText();
-    String date = lblDate.getText();
-    String leaveType = (String) txtLeavetype.getSelectedItem();
-    
-    // Get the selected start and end dates from JDateChooser components
-    Date startDate = jDCStartDate.getDate();
-    Date endDate = jDCEndDate.getDate();
-    
-    // Convert dates to string format
-    String startDateStr = formatDate(startDate); // Implement formatDate method to convert Date to String
-    String endDateStr = formatDate(endDate);     // Implement formatDate method to convert Date to String
-    
-    String reasonOfRequest = txtReasonOfRequest.getText();
+        // TODO add your handling code here:                                                                          
+        // Get the values from text fields
+        String employeeId = lblReqEid.getText();
+        String date = lblDate.getText();
+        String leaveType = (String) txtLeavetype.getSelectedItem();
 
-    // Check if any of the fields are empty
-    if (employeeId.isEmpty() || date.isEmpty() || leaveType == null || leaveType.isEmpty() || startDate == null || endDate == null || reasonOfRequest.isEmpty()) {
-        // Display an error message or handle the empty fields appropriately
-        JOptionPane.showMessageDialog(this, "Please fill in all required fields.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Exit the method without proceeding further
-    }
+        // Get the selected start and end dates from JDateChooser components
+        Date startDate = jDCStartDate.getDate();
+        Date endDate = jDCEndDate.getDate();
 
-    // Specify the full path to the CSV file
-    String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Request.csv";
+        // Convert dates to string format
+        String startDateStr = formatDate(startDate); // Implement formatDate method to convert Date to String
+        String endDateStr = formatDate(endDate);     // Implement formatDate method to convert Date to String
 
-    // Save the values to a CSV file
-    try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
-        // Check if the file is empty (i.e., if this is the first entry)
-        File file = new File(filePath);
-        if (file.length() == 0) { // If the file is empty, write the header row
-            writer.println("Employee ID,Date,Leave Type,Start Date,End Date,Reason, Status, Approver, Approved Date");
+        String reasonOfRequest = txtReasonOfRequest.getText();
+
+        // Check if any of the fields are empty
+        if (employeeId.isEmpty() || date.isEmpty() || leaveType == null || leaveType.isEmpty() || startDate == null || endDate == null || reasonOfRequest.isEmpty()) {
+            // Display an error message or handle the empty fields appropriately
+            JOptionPane.showMessageDialog(this, "Please fill in all required fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method without proceeding further
         }
-        // Write the current entry
-        writer.println(employeeId + "," + date + "," + leaveType + "," + startDateStr + "," + endDateStr + "," + reasonOfRequest);
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Handle the exception appropriately
-    }
 
-    // Add the values to the table model
-    DefaultTableModel model = (DefaultTableModel) requestHistory_table.getModel();
-    model.addRow(new Object[]{employeeId, date, leaveType, startDateStr, endDateStr, reasonOfRequest});
-    clearInputFields();
+        // Specify the full path to the CSV file
+        String filePath = "src\\main\\java\\files\\Request.csv";
 
-    // Display data for the current employee
-    displayDataForEmployee(employeeId);
+        // Save the values to a CSV file
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
+            // Check if the file is empty (i.e., if this is the first entry)
+            File file = new File(filePath);
+            if (file.length() == 0) { // If the file is empty, write the header row
+                writer.println("Employee ID,Request Date,Leave Type,Start Date,End Date,Reason,Status,Approver,Date Responded");
+            }
 
+            // Get the last row index
+            int lastRowIndex = getLastRowIndex(filePath);
+
+            // Write the current entry as a new line
+            writer.println(employeeId + "," + date + "," + leaveType + "," + startDateStr + "," + endDateStr + "," + reasonOfRequest + ",Pending,,");
+
+            // Display a confirmation message
+            JOptionPane.showMessageDialog(this, "Request submitted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception appropriately
+        }
+
+        // Clear input fields after submission
+        clearInputFields();
+    }              
+
+    // Method to get the last row index in the CSV file
+    private int getLastRowIndex(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int rowCount = 0;
+            while (reader.readLine() != null) {
+                rowCount++;
+            }
+            return rowCount;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1; // Error occurred while reading the file
+        }
+    
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profile_buttonActionPerformed
@@ -667,6 +626,19 @@ private Employee[] employee1;
         // TODO add your handling code here:  
     }//GEN-LAST:event_txtLeavetypeActionPerformed
 
+    private void btnLeaveLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveLogActionPerformed
+        // TODO add your handling code here:
+        
+        FrmLeaveHistory history = new FrmLeaveHistory(this);
+        history.getLblReqEid().setText(lblReqEid.getText());
+         
+        history.show();
+        history.setLocationRelativeTo(null); // Center the frame
+        
+        String employeeId = lblReqEid.getText();
+        history.displayDataForEmployee(employeeId); // Pass the employee ID 
+    }//GEN-LAST:event_btnLeaveLogActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -704,6 +676,7 @@ private Employee[] employee1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton attendance_button;
+    private javax.swing.JButton btnLeaveLog;
     private javax.swing.JButton btnSubmit;
     private com.toedter.calendar.JDateChooser jDCEndDate;
     private com.toedter.calendar.JDateChooser jDCStartDate;
@@ -712,17 +685,14 @@ private Employee[] employee1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDateToday;
     private javax.swing.JLabel lblEid;
     private javax.swing.JLabel lblEnddate;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblFileForRequest;
-    private javax.swing.JLabel lblHistory;
     private javax.swing.JLabel lblIDniEmployee;
     private javax.swing.JLabel lblLogoMotorPH;
     private javax.swing.JLabel lblReasonOfRequest;
@@ -734,7 +704,6 @@ private Employee[] employee1;
     private javax.swing.JLabel lblWelcomeMsg1;
     private javax.swing.JButton logOut_button;
     private javax.swing.JButton profile_button;
-    private javax.swing.JTable requestHistory_table;
     private javax.swing.JButton salary_button;
     private javax.swing.JComboBox<String> txtLeavetype;
     private javax.swing.JTextField txtReasonOfRequest;

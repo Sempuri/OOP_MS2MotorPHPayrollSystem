@@ -9,15 +9,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import javax.swing.JLabel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,9 +44,15 @@ public class FrmAttendance extends javax.swing.JFrame {
      */
     public FrmAttendance() {
         initComponents();
-        setResizable(false);
-        employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
-    
+        //setResizable(false);
+        employee1 = Employee.readEmployee("src\\main\\java\\files\\Employee.csv");
+        
+        // Assuming imagePath is the path to your image file
+        String imagePath = "src\\main\\java\\icons\\4851855-200 (1).png";
+        // Create an ImageIcon from the image file
+        ImageIcon icon = new ImageIcon(imagePath);
+        // Set the ImageIcon as the icon for the JLabel
+        jLabel2.setIcon(icon);
         
         showDate();
         showTime();
@@ -56,7 +67,13 @@ public class FrmAttendance extends javax.swing.JFrame {
     public JLabel getLblAttFName() {
         return lblAttFName;
     }
+
+    public JTable getTimeTracker_table() {
+        return timeTracker_table;
+    }
     
+   
+    //method for show date
      public void showDate(){
         Date d = new Date();
         SimpleDateFormat s = new SimpleDateFormat ("MM/dd/yyyy");
@@ -81,7 +98,7 @@ public class FrmAttendance extends javax.swing.JFrame {
          DefaultTableModel model = (DefaultTableModel) timeTracker_table.getModel();
         model.setRowCount(0); // Clear existing rows
 
-        String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\TimeTracker.csv";
+        String filePath = "src\\main\\java\\files\\TimeTracker.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             // Read and discard the header row
@@ -97,8 +114,8 @@ public class FrmAttendance extends javax.swing.JFrame {
             e.printStackTrace();
             // Handle the exception appropriately
         }
-
-}
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,6 +134,8 @@ public class FrmAttendance extends javax.swing.JFrame {
         timeOut_button = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         timeTracker_table = new javax.swing.JTable();
+        btnReqOvertime = new javax.swing.JButton();
+        btnViewOvertimeHistory = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         logOut_button = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -209,6 +228,26 @@ public class FrmAttendance extends javax.swing.JFrame {
         timeTracker_table.setShowGrid(true);
         jScrollPane2.setViewportView(timeTracker_table);
 
+        btnReqOvertime.setBackground(new java.awt.Color(173, 202, 206));
+        btnReqOvertime.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        btnReqOvertime.setForeground(new java.awt.Color(53, 66, 68));
+        btnReqOvertime.setText("Request Overtime");
+        btnReqOvertime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReqOvertimeActionPerformed(evt);
+            }
+        });
+
+        btnViewOvertimeHistory.setBackground(new java.awt.Color(173, 202, 206));
+        btnViewOvertimeHistory.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        btnViewOvertimeHistory.setForeground(new java.awt.Color(53, 66, 68));
+        btnViewOvertimeHistory.setText("View Overtime Request History");
+        btnViewOvertimeHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewOvertimeHistoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -216,29 +255,31 @@ public class FrmAttendance extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(106, 106, 106)
+                        .addComponent(btnReqOvertime)
+                        .addGap(74, 74, 74)
+                        .addComponent(btnViewOvertimeHistory))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
                         .addComponent(timeIn_button, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(121, 121, 121)
-                        .addComponent(timeOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(lblTime)
-                        .addGap(221, 221, 221))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(lblDate)
-                        .addGap(229, 229, 229))))
+                        .addComponent(timeOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTime, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(lblDate)
+                                .addGap(8, 8, 8))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(11, 11, 11)
                 .addComponent(lblTime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDate)
@@ -247,7 +288,11 @@ public class FrmAttendance extends javax.swing.JFrame {
                     .addComponent(timeOut_button, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeIn_button, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReqOvertime)
+                    .addComponent(btnViewOvertimeHistory))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -299,11 +344,11 @@ public class FrmAttendance extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(lblLogoMotorPH, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addComponent(lblWelcomeMsg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAttFName)
-                .addGap(132, 132, 132)
+                .addGap(207, 207, 207)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblIDniEmployee)
@@ -340,7 +385,8 @@ public class FrmAttendance extends javax.swing.JFrame {
 
         profilePicture_panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\icons\\4851855-200 (1).png")); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(242, 242, 242));
+        jLabel2.setText("2");
 
         javax.swing.GroupLayout profilePicture_panelLayout = new javax.swing.GroupLayout(profilePicture_panel);
         profilePicture_panel.setLayout(profilePicture_panelLayout);
@@ -349,15 +395,15 @@ public class FrmAttendance extends javax.swing.JFrame {
             .addGroup(profilePicture_panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(profilePicture_icon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         profilePicture_panelLayout.setVerticalGroup(
             profilePicture_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilePicture_panelLayout.createSequentialGroup()
                 .addGroup(profilePicture_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(profilePicture_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 14, Short.MAX_VALUE))
         );
@@ -379,7 +425,6 @@ public class FrmAttendance extends javax.swing.JFrame {
         jMCMonth.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jMCMonth.setYearChooser(jYCYear);
 
-        jYCYear.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jYCYear.setStartYear(2022);
         jYCYear.setValue(2022);
 
@@ -388,47 +433,46 @@ public class FrmAttendance extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTotalWorkedHours)
-                    .addComponent(lblTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(profilePicture_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jMCMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(profilePicture_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jYCYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jMCMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jYCYear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTotalWorkedHours)
+                            .addComponent(lblTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(35, 35, 35))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(42, Short.MAX_VALUE)
-                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jMCMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jYCYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)))
+                        .addComponent(lblTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jMCMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jYCYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(lblTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTotalWorkedHours, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(profilePicture_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(profilePicture_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
         );
 
         jPanel6.setBackground(new java.awt.Color(108, 133, 136));
@@ -442,9 +486,9 @@ public class FrmAttendance extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
+                .addGap(256, 256, 256)
                 .addComponent(lblTimeTracker)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,34 +589,30 @@ public class FrmAttendance extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(440, 440, 440)
-                                .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(request_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(204, 204, 204))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(219, 219, 219)
-                                        .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addGap(221, 221, 221)
+                        .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(request_button, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(296, 296, 296))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(3, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -591,17 +631,17 @@ public class FrmAttendance extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(salary_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(profile_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(request_button, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1110, 620);
+        jPanel2.setBounds(0, 0, 1170, 630);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -614,11 +654,7 @@ public class FrmAttendance extends javax.swing.JFrame {
         request.getLblReqFName().setText(lblAttFName.getText());    
         request.show();
         request.setLocationRelativeTo(null); // Center the frame
-        
-        String employeeId = lblAttEid.getText();
-        request.displayDataForEmployee(employeeId); // Pass the employee ID
-            
-            dispose();
+         dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
 
     private void profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profile_buttonActionPerformed
@@ -672,7 +708,7 @@ public class FrmAttendance extends javax.swing.JFrame {
 
     private void timeIn_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeIn_buttonActionPerformed
         // TODO add your handling code here:
-         // Get the current date and time
+       // Get the current date and time
         String currentDate = lblDate.getText();
         String currentTime = lblTime.getText();
 
@@ -700,7 +736,7 @@ public class FrmAttendance extends javax.swing.JFrame {
         model.addRow(new Object[]{employeeId, currentDate, currentTime, null}); // Assuming the last column is for the time-out
 
         // Save the data to a CSV file
-        String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\TimeTracker.csv";
+        String filePath = "src\\main\\java\\files\\TimeTracker.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             // Write the data to the CSV file on the same line
             writer.write(employeeId + "," + currentDate + "," + currentTime + ",");
@@ -710,6 +746,7 @@ public class FrmAttendance extends javax.swing.JFrame {
             e.printStackTrace();
             // Handle the exception appropriately
         }
+    
     }//GEN-LAST:event_timeIn_buttonActionPerformed
 
     private void timeOut_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeOut_buttonActionPerformed
@@ -773,7 +810,7 @@ public class FrmAttendance extends javax.swing.JFrame {
                     model.setValueAt(totalWorkedHours, lastInsertedRowIndex, 4);
 
                     // Save the updated row to the CSV file
-                    String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\TimeTracker.csv";
+                    String filePath = "src\\main\\java\\files\\TimeTracker.csv";
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                         String employeeId = (String) model.getValueAt(lastInsertedRowIndex, 0);
                         String date = (String) model.getValueAt(lastInsertedRowIndex, 1);
@@ -809,9 +846,9 @@ public class FrmAttendance extends javax.swing.JFrame {
         return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
                 cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
                 cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
-
+        
     }//GEN-LAST:event_timeOut_buttonActionPerformed
-
+  
     private void salary_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salary_buttonActionPerformed
         // TODO add your handling code here:
         FrmSalary salary = new FrmSalary();
@@ -835,7 +872,7 @@ public class FrmAttendance extends javax.swing.JFrame {
         model.setRowCount(0); // Clear existing rows
 
         // File path
-        String filePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\OldAttendance.csv";
+        String filePath = "src\\main\\java\\files\\OldAttendance.csv";
 
         // Flag to check if data is found for the selected month and year
         boolean dataFound = false;
@@ -889,6 +926,44 @@ public class FrmAttendance extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnViewActionPerformed
 
+    private void btnReqOvertimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReqOvertimeActionPerformed
+        // TODO add your handling code here:
+        // Get the selected row index
+        int selectedRowIndex = timeTracker_table.getSelectedRow();
+
+        // Check if a row is selected
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to request overtime.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Retrieve the data from the selected row
+        DefaultTableModel model = (DefaultTableModel) timeTracker_table.getModel();
+        String[] overtimeInfo = new String[model.getColumnCount()];
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            Object value = model.getValueAt(selectedRowIndex, i);
+            overtimeInfo[i] = (value != null) ? value.toString() : ""; // Handle null values gracefully
+        }
+
+        // Pass the reference to the existing FrmHRpage instance to FrmEditLeave
+        FrmRequestOvertime requestOvertime = new FrmRequestOvertime(this); // Pass the reference
+        requestOvertime.populateFields(overtimeInfo);
+        requestOvertime.setVisible(true);
+        requestOvertime.setLocationRelativeTo(null); // Center the frame
+    }//GEN-LAST:event_btnReqOvertimeActionPerformed
+
+    private void btnViewOvertimeHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOvertimeHistoryActionPerformed
+        // TODO add your handling code here:
+        FrmOvertimeHistory history = new FrmOvertimeHistory(this);
+        history.getLblReqEid().setText(lblAttEid.getText());
+         
+        history.show();
+        history.setLocationRelativeTo(null); // Center the frame
+        
+        String employeeId = lblAttEid.getText();
+        history.displayDataForEmployee(employeeId); // Pass the employee ID     
+    }//GEN-LAST:event_btnViewOvertimeHistoryActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -933,7 +1008,9 @@ public class FrmAttendance extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable attendance_table;
+    private javax.swing.JButton btnReqOvertime;
     private javax.swing.JButton btnView;
+    private javax.swing.JButton btnViewOvertimeHistory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

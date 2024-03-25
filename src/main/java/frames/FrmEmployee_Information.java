@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import frames.FrmSalary;
 import frames.FrmRequest;
+import javax.swing.ImageIcon;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -21,6 +22,14 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
     public FrmEmployee_Information() {
         initComponents();
         setResizable(false);
+        
+        // Assuming imagePath is the path to your image file
+        String imagePath = "src\\main\\java\\icons\\4851855-200.png";
+        // Create an ImageIcon from the image file
+        ImageIcon icon = new ImageIcon(imagePath);
+        // Set the ImageIcon as the icon for the JLabel
+        jLabel5.setIcon(icon);
+        
     }
 //Getter Method
 
@@ -226,7 +235,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
 
         profilePicture_panel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\icons\\4851855-200.png")); // NOI18N
+        jLabel5.setText("1");
 
         javax.swing.GroupLayout profilePicture_panelLayout = new javax.swing.GroupLayout(profilePicture_panel);
         profilePicture_panel.setLayout(profilePicture_panelLayout);
@@ -577,11 +586,7 @@ public class FrmEmployee_Information extends javax.swing.JFrame {
         request.getLblReqFName().setText(lblFName.getText());  
         request.show();
         request.setLocationRelativeTo(null); // Center the frame
-        
-        String employeeId = lblEid.getText();
-        request.displayDataForEmployee(employeeId); // Pass the employee ID
-            
-            dispose();
+         dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
 
     private void attendance_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendance_buttonActionPerformed

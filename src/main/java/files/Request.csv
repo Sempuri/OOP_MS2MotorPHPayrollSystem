@@ -1,18 +1,7 @@
-Employee ID,Date,Leave Type,Start Date,End Date,Reason
-1,03-19-2024,Vacation Leave,asdad,asdasdas,asdasdas,,,
-1,03-19-2024,Bereavement Leave,asdasdas,asdasdas,asdasdas,,,
-2,03-19-2024,Vacation Leave,asdasds,asdasdas,asdasdas
-2,03-19-2024,Emergency Leave,asdasasd,asdasdasd,asdasdasd
-2,03-19-2024,Maternity Leave,asdasdas,asdasdas,asdasdasd
-34,03-19-2024,Vacation Leave,asdasdas,asdasdas,asdasdas
-34,03-19-2024,Single Parent Leave,asdasdas,asdasda,asdasdasd
-1,03-19-2024,Single Parent Leave,asdasdas,asdasdas,asdasdas
-1,03-20-2024,Emergency Leave,03-12-2024,03-31-2024,sadasdasdsa
-1,03-20-2024,Vacation Leave,03-22-2024,09-30-2024,asdsadasdsa
-1,03-20-2024,--Select Type of Leave--,03-31-2024,10-17-2024,asdasdasdsa
-1,03-20-2024,--Select Type of Leave--,03-21-2024,04-16-2024,asdasdasdas
-1,03-20-2024,Bereavement Leave,03-21-2024,03-31-2024,asdsadasdasd
-1,03-20-2024,Sick Leave,03-21-2024,03-31-2024,sadasdasd
-1,03-20-2024,Vacation Leave,03-20-2024,12-31-2024,asdasdsadasdassdaasd
-2,03-20-2024,Sick Leave,03-21-2024,03-24-2024,asdsadsadsa
-1,03/21/2024,Emergency Leave,03/21/2024,03/31/2024,asdasdasdas
+EmpID,Date of Request,Leave Type,Start Date,End Date,Reason,Status,Approver,Approved Date
+1,03/26/2024,Sick Leave,03/26/2024,03/26/2024,asdasdasdasasd,Approved,Villanueva,03/26/2024
+1,03/26/2024,Maternity Leave,03/26/2024,03/26/2024,asdasdasdas,Approved,Villanueva,03/26/2024
+2,03/26/2024,Sick Leave,03/26/2024,03/26/2024,dsadsadsadas,Approved,Villanueva,03/26/2024
+2,03/26/2024,Vacation Leave,03/26/2024,03/26/2024,sadsadasasd,Villanueva,Approved,03/26/2024
+1,03/26/2024,Single Parent Leave,03/30/2024,12/31/2024,asdsadsadasasdasd,Pending,,
+2,03/26/2024,Maternity Leave,03/30/2024,11/12/2024,asdsadsaasd,Pending,,

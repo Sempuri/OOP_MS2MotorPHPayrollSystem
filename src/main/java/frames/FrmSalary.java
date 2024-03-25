@@ -28,7 +28,7 @@ private Employee[] employee1;
     public FrmSalary() {
         initComponents();
         setResizable(false);
-        employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
+        employee1 = Employee.readEmployee("src\\main\\java\\files\\Employee.csv");
     }
 
     //getter
@@ -682,11 +682,7 @@ private Employee[] employee1;
         request.getLblReqFName().setText(lblSalFName.getText());    
         request.show();
         request.setLocationRelativeTo(null); // Center the frame
-        
-        String employeeId = lblSalEid.getText();
-        request.displayDataForEmployee(employeeId); // Pass the employee ID
-        
-            dispose();
+        dispose();
     }//GEN-LAST:event_request_buttonActionPerformed
 
     private void txtSSSdeductionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSSSdeductionsActionPerformed
@@ -771,8 +767,8 @@ private Employee[] employee1;
     private void btnViewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSalaryActionPerformed
         // TODO add your handling code here:
         // Read the "Employee.csv" file to get hourly rate and monthly rate
-        String employeeFilePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv";
-        String attendanceFilePath = "C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\OldAttendance.csv";
+        String employeeFilePath = "src\\main\\java\\files\\Employee.csv";
+        String attendanceFilePath = "src\\main\\java\\files\\OldAttendance.csv";
 
         // Get the selected month and year
         int selectedMonth = jMCMonth.getMonth() + 1; // Month is zero-based, so add 1

@@ -5,9 +5,19 @@
 package frames;
 import classes.Login;
 import classes.Employee;
+import classes.LeaveRequest;
+import classes.OvertimeRequest;
 import com.opencsv.exceptions.CsvValidationException;
+import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +32,7 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null); // Center the frame
-        employee1 = Employee.readEmployee("C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv");
+        employee1 = Employee.readEmployee("src\\main\\java\\files\\Employee.csv");
     }
 
     /**
@@ -44,6 +54,8 @@ public class FrmLogin extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        lblPassword1 = new javax.swing.JLabel();
+        jCBRole = new javax.swing.JComboBox<>();
         lblSubtitle = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
 
@@ -91,6 +103,7 @@ public class FrmLogin extends javax.swing.JFrame {
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
 
+        txtUsername.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -111,28 +124,40 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
             }
         });
 
+        lblPassword1.setFont(new java.awt.Font("Verdana", 1, 16)); // NOI18N
+        lblPassword1.setForeground(new java.awt.Color(255, 255, 255));
+        lblPassword1.setText("Login as:");
+
+        jCBRole.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jCBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "HR", "Payroll", "IT" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(137, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(127, 127, 127))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                    .addComponent(jCBRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                     .addContainerGap(222, Short.MAX_VALUE)
@@ -144,13 +169,17 @@ public class FrmLogin extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(92, 92, 92)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(96, 96, 96)
@@ -212,58 +241,246 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-    Login _login = new Login();
-    _login.SetUsername(txtUsername.getText());
-    _login.SetPassword(txtPassword.getPassword());
+        // Get the selected role from the JComboBox
+            String selectedRole = (String) jCBRole.getSelectedItem(); 
 
-    try {
-        if (_login.verifyLogin()) {
-            System.out.println("Login successful"); // Add this line for debugging
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-            setVisible(false);
-            FrmEmployee_Information _profile = new FrmEmployee_Information();
-            
-            for (Employee infoemp: employee1){
-                if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
-                    _profile.setVisible(true);
-                    _profile.setLocationRelativeTo(null); // Center the frame
-                    _profile.getLblEmpStatus().setText(infoemp.GetStatus());
-                    _profile.getTxtEmployeeID().setText(String.valueOf(infoemp.GetEmployeeID()));
-                    _profile.getTxtFirstName().setText(infoemp.GetFirstName());
-                    _profile.getTxtLastName().setText(infoemp.GetLastName());
-                    _profile.getTxtRole().setText(infoemp.GetRole());
-                    _profile.getTxtDepartment().setText(infoemp.GetDepartment());
-                    _profile.getTxtSupervisor().setText(infoemp.GetSupervisor());
-                    _profile.getTxtSSS_number().setText(infoemp.GetSSSNumber());
-                    _profile.getTxtPagibig_number().setText(infoemp.GetPagibigNumber());
-                    _profile.getTxtPhilhealth_number().setText(infoemp.GetPhilhealthNumber());
-                    _profile.getTxtTin_number().setText(infoemp.GetTinNumber());
-                    _profile.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
-                    _profile.getLblFName().setText(infoemp.GetFirstName());
-                    
-                    System.out.println("sss" + infoemp.GetSSSNumber()+ infoemp.GetBirthday() + infoemp.GetDepartment() + infoemp.GetFirstName() +infoemp.GetLastName() +infoemp.GetPhilhealthNumber() +
-                    infoemp.GetRole() + infoemp.GetStatus() +infoemp.GetSupervisor() + infoemp.GetTinNumber());
-                    
-                    
-                    
-                    
-                    break;
+            // Check if a role is selected
+            if (selectedRole == null || selectedRole.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please select a role.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Get the username and password from the text fields
+            String username = txtUsername.getText();
+            char[] passwordChars = txtPassword.getPassword();
+            String password = new String(passwordChars);
+
+            // Check if the username and password are empty
+            if (username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter both username and password.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Create an array containing the login information
+            String[] accInfo = {username, password, selectedRole};
+
+            // Create a Login object with the login information
+            Login _login = new Login(accInfo);
+
+            // Verify the login credentials
+            if (_login.verifyLogin()) {
+                System.out.println("Login successful"); // For debugging
+
+                // Load employee data from CSV
+                String csvFilePath = "src\\main\\java\\files\\Users.csv";
+                try {
+                    // Check if the selected role is "Employee" or if the login is successful regardless of role
+                    if (selectedRole.equals("Employee")) {
+                        openEmployeeInformationFrame(_login);
+                    } else {
+                        // Check if the user has access to the selected role
+                        if (checkUserRole(_login, csvFilePath, selectedRole)) {
+                            // If the user has access, open the corresponding page
+                            switch (selectedRole) {
+                                case "HR":
+                                    openHRPage(_login);
+                                    break;
+                                case "Payroll":
+                                    openPayrollPage(_login);
+                                    break;
+                                case "IT":
+                                    openITPage(_login);
+                                    break;
+                                default:
+                                    JOptionPane.showMessageDialog(this, "Invalid Role Selection.");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "You don't have access to this role.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                else{
-                    
+            } else {
+                System.out.println("Invalid credentials"); // For debugging
+                JOptionPane.showMessageDialog(this, "Invalid Credentials. Try Again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }
+
+    private boolean checkUserRole(Login _login, String csvFilePath, String selectedRole) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length >= 3) {
+                String username = parts[0];
+                String password = parts[1];
+                String role = parts[2].trim(); // Assuming role is at index 2
+
+                // Check if username and password match
+                if (_login.getUsername().equals(username) && _login.getPassword().equals(password)) {
+                    // Check if the user's role matches the selected role
+                    if (role.equals(selectedRole)) {
+                        reader.close();
+                        return true;
+                    }
                 }
             }
-       
-            
-            
-          
-        } else {
-            System.out.println("Invalid credentials"); // Add this line for debugging
-            JOptionPane.showMessageDialog(this, "Invalid Credentials. Try Again.");
-          }
-       } catch (IOException | CsvValidationException ex) {
-        ex.printStackTrace(); // Add this line for debugging
+        }
+        reader.close();
+        return false;
+    }
+
+    private void openITPage(Login _login) {
+        JOptionPane.showMessageDialog(this, "Login Successful!");
+        setVisible(false);
+        FrmITpage _itPage = new FrmITpage();
+
+        Login[] accounts = Login.readAccount("src\\main\\java\\files\\Users.csv"); //C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv
+        displayAccountInfo(_itPage, accounts);
         
+
+        for (Employee infoemp : employee1) {
+            if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
+                _itPage.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                _itPage.getLblFName().setText(infoemp.GetFirstName());
+                break;
+            }
+        }
+
+        _itPage.setVisible(true);
+        _itPage.setLocationRelativeTo(null); // Center the frame
+    }
+    
+    private void openHRPage(Login _login) {
+        JOptionPane.showMessageDialog(this, "Login Successful!");
+        setVisible(false);
+        FrmHRpage _hrPage = new FrmHRpage();
+
+        Employee[] employees = Employee.readEmployee("src\\main\\java\\files\\Employee.csv"); //C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv
+        displayEmployeeInfo(_hrPage, employees);
+        
+        LeaveRequest[] leaveRequests = LeaveRequest.readLeaveRequest("src\\main\\java\\files\\Request.csv");
+        displayLeaveInfo(_hrPage, leaveRequests);
+        
+        OvertimeRequest[] overtimeRequests = OvertimeRequest.readOvertimeRequest("src\\main\\java\\files\\OvertimeRequest.csv");
+        displayOvertimeInfo(_hrPage, overtimeRequests);
+
+        for (Employee infoemp : employee1) {
+            if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
+                _hrPage.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                _hrPage.getLblFName().setText(infoemp.GetFirstName());
+                break;
+            }
+        }
+
+        _hrPage.setVisible(true);
+        _hrPage.setLocationRelativeTo(null); // Center the frame
+    }
+    
+    // for display of employee info in TblEmpInfo
+    private void displayEmployeeInfo(FrmHRpage _hrPage, Employee[] employees) {
+        DefaultTableModel model = (DefaultTableModel) _hrPage.getTblEmpInfo().getModel();
+        for (Employee employee : employees) {
+            model.addRow(new Object[]{employee.GetEmployeeID(), employee.GetLastName(), employee.GetFirstName(), employee.GetBirthday(), employee.getAddress(), employee.getPhonenumber(),
+                employee.GetSSSNumber(), employee.GetPhilhealthNumber(), employee.GetTinNumber(), employee.GetPagibigNumber(), employee.GetStatus(), employee.getPosition(), 
+                employee.GetDepartment(), employee.GetSupervisor(), employee.getBasicSalary(), employee.getRiceSubsidy(), employee.getPhoneAllowance(), employee.getClothingAllowance(),
+                employee.getGrossSemi(), employee.getHourlyRate()});
+        }
+    }
+
+    // for display of leave requests in TblLeaveReq
+    private void displayLeaveInfo(FrmHRpage _hrPage, LeaveRequest[] leaveRequests) {
+        DefaultTableModel model = (DefaultTableModel) _hrPage.getTblLeaveReq().getModel();
+        for (LeaveRequest leaverequest : leaveRequests) {
+            model.addRow(new Object[]{leaverequest.getEmployeeID(), leaverequest.getReqDate(), leaverequest.getLeaveType(), leaverequest.getStartDate(), 
+                leaverequest.getEndDate(), leaverequest.getReason(), leaverequest.getStatus(), leaverequest.getApprover(), leaverequest.getDateResponded()});
+        }
+    }
+    
+    // for display of overtime requests in TblLeaveReq
+    private void displayOvertimeInfo(FrmHRpage _hrPage, OvertimeRequest[] overtimeRequests) {
+        DefaultTableModel model = (DefaultTableModel) _hrPage.getTblOvertimeReq().getModel();
+        for (OvertimeRequest overtimerequest : overtimeRequests) {
+            model.addRow(new Object[]{overtimerequest.getEmployeeID(), overtimerequest.getReqDate(), overtimerequest.getOtDate(), overtimerequest.getTimeIn(), 
+                overtimerequest.getTimeOut(), overtimerequest.getTotalWorkedHours(), overtimerequest.getStatus(), overtimerequest.getApprover(), overtimerequest.getDateResponded()});
+        }
+    }
+    
+    // for display of accounts in TblAccounts
+    private void displayAccountInfo(FrmITpage _itPage, Login[] accounts) {
+        DefaultTableModel model = (DefaultTableModel) _itPage.getTblAccounts().getModel();
+        for (Login login : accounts) {
+            model.addRow(new Object[]{login.getUsername(), login.getPassword(), login.getRole()});
+        }
+    }
+    
+    
+    private void openPayrollPage(Login _login) {
+        JOptionPane.showMessageDialog(this, "Login Successful!");
+        setVisible(false);
+        FrmPayrollpage _payrollPage = new FrmPayrollpage();
+        
+        
+        Employee[] employees = Employee.readEmployee("src\\main\\java\\files\\Employee.csv"); //C:\\Users\\DREAM PC\\Documents\\NetBeansProjects\\PayrollSystemMaven\\src\\main\\java\\files\\Employee.csv
+        displayPayrollInfo(_payrollPage, employees);
+        
+        
+        for (Employee infoemp: employee1) {
+            if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
+                _payrollPage.setVisible(true);
+                _payrollPage.setLocationRelativeTo(null); // Center the frame
+                
+                _payrollPage.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                _payrollPage.getLblFName().setText(infoemp.GetFirstName());
+            }
+        }
+        
+        _payrollPage.setVisible(true);
+        _payrollPage.setLocationRelativeTo(null); // Center the frame
+        
+    }
+    
+        // for display of employee info in TblEmpInfo
+    private void displayPayrollInfo(FrmPayrollpage _payrollPage, Employee[] employees) {
+        DefaultTableModel model = (DefaultTableModel) _payrollPage.getTblEmpInfo().getModel();
+        for (Employee employee : employees) {
+            model.addRow(new Object[]{employee.GetEmployeeID(), employee.GetFirstName(), employee.GetLastName(), employee.GetBirthday(), employee.getAddress(), employee.getPhonenumber(),
+                employee.GetSSSNumber(), employee.GetPhilhealthNumber(), employee.GetTinNumber(), employee.GetPagibigNumber(), employee.GetStatus(), employee.getPosition(), 
+                employee.GetDepartment(), employee.GetSupervisor(), employee.getBasicSalary(), employee.getRiceSubsidy(), employee.getPhoneAllowance(), employee.getClothingAllowance(),
+                employee.getGrossSemi(), employee.getHourlyRate()});
+        }
+    
+
+    }
+    private void openEmployeeInformationFrame(Login _login) {
+        JOptionPane.showMessageDialog(this, "Login Successful!");
+        setVisible(false);
+        FrmEmployee_Information _profile = new FrmEmployee_Information();
+
+        for (Employee infoemp: employee1) {
+            if (infoemp.GetEmployeeID() == Integer.parseInt(_login.getUsername())) {
+                _profile.setVisible(true);
+                _profile.setLocationRelativeTo(null); // Center the frame
+                _profile.getLblEmpStatus().setText(infoemp.GetStatus());
+                _profile.getTxtEmployeeID().setText(String.valueOf(infoemp.GetEmployeeID()));
+                _profile.getTxtFirstName().setText(infoemp.GetFirstName());
+                _profile.getTxtLastName().setText(infoemp.GetLastName());
+                _profile.getTxtRole().setText(infoemp.GetRole());
+                _profile.getTxtDepartment().setText(infoemp.GetDepartment());
+                _profile.getTxtSupervisor().setText(infoemp.GetSupervisor());
+                _profile.getTxtSSS_number().setText(infoemp.GetSSSNumber());
+                _profile.getTxtPagibig_number().setText(infoemp.GetPagibigNumber());
+                _profile.getTxtPhilhealth_number().setText(infoemp.GetPhilhealthNumber());
+                _profile.getTxtTin_number().setText(infoemp.GetTinNumber());
+                _profile.getLblEid().setText(String.valueOf(infoemp.GetEmployeeID()));
+                _profile.getLblFName().setText(infoemp.GetFirstName());
+
+                System.out.println("sss" + infoemp.GetSSSNumber() + infoemp.GetBirthday() + infoemp.GetDepartment() + infoemp.GetFirstName() + infoemp.GetLastName() + infoemp.GetPhilhealthNumber() +
+                        infoemp.GetRole() + infoemp.GetStatus() + infoemp.GetSupervisor() + infoemp.GetTinNumber());
+
+                break;
+            }
     }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -311,11 +528,13 @@ public class FrmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JComboBox<String> jCBRole;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPassword1;
     private javax.swing.JLabel lblPayrollSystem;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
