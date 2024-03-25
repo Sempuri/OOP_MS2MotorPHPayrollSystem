@@ -445,7 +445,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private void displayPayrollInfo(FrmPayrollpage _payrollPage, Employee[] employees) {
         DefaultTableModel model = (DefaultTableModel) _payrollPage.getTblEmpInfo().getModel();
         for (Employee employee : employees) {
-            model.addRow(new Object[]{employee.GetEmployeeID(), employee.GetFirstName(), employee.GetLastName(), employee.GetBirthday(), employee.getAddress(), employee.getPhonenumber(),
+            model.addRow(new Object[]{employee.GetEmployeeID(), employee.GetLastName(), employee.GetFirstName(), employee.GetBirthday(), employee.getAddress(), employee.getPhonenumber(),
                 employee.GetSSSNumber(), employee.GetPhilhealthNumber(), employee.GetTinNumber(), employee.GetPagibigNumber(), employee.GetStatus(), employee.getPosition(), 
                 employee.GetDepartment(), employee.GetSupervisor(), employee.getBasicSalary(), employee.getRiceSubsidy(), employee.getPhoneAllowance(), employee.getClothingAllowance(),
                 employee.getGrossSemi(), employee.getHourlyRate()});
