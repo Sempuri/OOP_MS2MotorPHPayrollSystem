@@ -301,6 +301,7 @@ public class FrmPayrollpage extends javax.swing.JFrame {
         FrmEditSalary editSalaryForm = new FrmEditSalary(this); // Pass the reference
         editSalaryForm.populateFields(empInfo);
         editSalaryForm.setVisible(true);
+        editSalaryForm.setLocationRelativeTo(null); // Center the frame
         
     }//GEN-LAST:event_btnEditSalaryInfoActionPerformed
 

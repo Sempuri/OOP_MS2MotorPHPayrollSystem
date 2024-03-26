@@ -29,12 +29,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -49,21 +52,23 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
-                          <Component id="profile_button" min="-2" pref="173" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="attendance_button" min="-2" pref="173" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="request_button" min="-2" pref="173" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="profile_button" min="-2" pref="173" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  <Component id="attendance_button" min="-2" pref="173" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <Component id="request_button" min="-2" pref="173" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jPanel6" max="32767" attributes="0"/>
                               <Component id="jPanel3" max="32767" attributes="0"/>
+                              <Component id="jPanel6" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -71,14 +76,13 @@
                               <Component id="jPanel7" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel5" max="32767" attributes="0"/>
                               <Component id="jPanel8" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -99,13 +103,13 @@
                       <Component id="jPanel7" max="32767" attributes="0"/>
                       <Component id="jPanel8" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="profile_button" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       <Component id="attendance_button" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                       <Component id="request_button" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -124,11 +128,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="lblLogoMotorPH" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                      <EmptySpace pref="145" max="32767" attributes="0"/>
                       <Component id="lblWelcomeMsg" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblSalFName" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblIDniEmployee" min="-2" max="-2" attributes="0"/>
@@ -165,7 +169,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -275,10 +279,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="lblSalaryInfo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -286,7 +290,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblSalaryInfo" pref="29" max="32767" attributes="0"/>
+                      <Component id="lblSalaryInfo" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -327,7 +331,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblDeductions" pref="29" max="32767" attributes="0"/>
+                      <Component id="lblDeductions" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -358,9 +362,9 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="113" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lblAllowance" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -368,7 +372,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblAllowance" pref="29" max="32767" attributes="0"/>
+                      <Component id="lblAllowance" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -403,17 +407,15 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                               <Component id="btnViewSalary" min="-2" pref="113" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace pref="37" max="32767" attributes="0"/>
-                                              <Component id="lblPeriodStartDate" min="-2" pref="141" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jMCMonth" alignment="0" pref="178" max="32767" attributes="0"/>
+                                          <Component id="lblPeriodStartDate" min="-2" pref="141" max="-2" attributes="0"/>
+                                          <Component id="jMCMonth" alignment="0" pref="160" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -421,22 +423,29 @@
                                           <Component id="jYCYear" min="-2" pref="117" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lblGrossSalary" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblMonthlyRate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblHourlyRate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtHourlyRate" alignment="0" pref="292" max="32767" attributes="0"/>
-                                      <Component id="txtMonthlyRate" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtGrossSalary" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtNetSalary" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                          <Component id="lblNetSalary" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtGrossSalary" alignment="0" pref="258" max="32767" attributes="0"/>
+                                          <Component id="txtMonthlyRate" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblGrossSalary" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMonthlyRate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblHourlyRate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                                              <Component id="lblNetSalary" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtHourlyRate" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="txtNetSalary" min="-2" pref="198" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -452,7 +461,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jMCMonth" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="jYCYear" pref="24" max="32767" attributes="0"/>
+                          <Component id="jYCYear" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="btnViewSalary" min="-2" pref="32" max="-2" attributes="0"/>
@@ -622,10 +631,10 @@
                                   <Component id="lblPhilhealthDeductions" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPagibigDeductions" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblSSSdeductions" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSSSdeductions" max="32767" attributes="0"/>
+                                  <Component id="txtPhilhealthDeductions" alignment="0" pref="267" max="32767" attributes="0"/>
                                   <Component id="txtPagibigDeductions" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtPhilhealthDeductions" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTotalDeductions" alignment="0" min="-2" pref="285" max="-2" attributes="0"/>
+                                  <Component id="txtSSSdeductions" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtTotalDeductions" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -640,7 +649,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -789,8 +798,8 @@
                           <Component id="lblTotalAllowance" min="-2" max="-2" attributes="0"/>
                           <Component id="lblClothingAllowance" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPhoneAllowance" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRiceSubsidy" pref="279" max="32767" attributes="0"/>
                           <Component id="lblRiceSubsidy" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtRiceSubsidy" pref="290" max="32767" attributes="0"/>
                           <Component id="txtPhoneAllowance" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtClothingAllowance" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTotalAllowance" alignment="0" max="32767" attributes="0"/>
